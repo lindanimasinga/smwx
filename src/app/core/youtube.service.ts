@@ -3,17 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Episode } from '../models/episode.model';
+import { config } from './config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YouTubeDataService {
   private http = inject(HttpClient);
-  private apiKey = 'YOUR_API_KEY'; // TODO: Add your YouTube API key
-  private playlistId = 'YOUR_PLAYLIST_ID'; // TODO: Add your playlist ID
 
   getPlaylist(): Observable<Episode[]> {
-    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${this.playlistId}&maxResults=50&key=${this.apiKey}`;
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${config.playlistId}&maxResults=50&key=${config.apiKey}`;
 
     return this.http.get<any>(url).pipe(
       map(response => response.items.map((item: any): Episode => ({
