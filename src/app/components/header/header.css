@@ -1,12 +1,25 @@
+
+:host {
+  display: block;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 .header {
-  background-color: #fff;
+  background-color: var(--card-background);
   padding: 1rem 2rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--card-border-color);
+  box-shadow: 0 2px 5px var(--shadow-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: var(--text-color);
 }
 
-.logo img {
-  height: 40px;
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--primary-color);
 }

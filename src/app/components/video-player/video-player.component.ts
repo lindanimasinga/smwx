@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
       padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
+      border-radius: 1rem;
     }
 
     .video-container iframe {

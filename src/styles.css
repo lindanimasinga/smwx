@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+
+:root, .light-theme {
+  --background-color: #f9f9f9;
+  --text-color: #030303;
+  --primary-color: #ff0000;
+  --accent-color: #065fd4;
+  --card-background: #ffffff;
+  --card-border-color: #cccccc;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme {
+  --background-color: #0f0f0f;
+  --text-color: #f1f1f1;
+  --primary-color: #ff0000;
+  --accent-color: #3ea6ff;
+  --card-background: #222222;
+  --card-border-color: #3d3d3d;
+  --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container-fluid {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}

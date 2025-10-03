@@ -40,3 +40,5 @@ Thumbs.db
 
 # Firebase
 .firebase
+
+/src/app/core/config.ts

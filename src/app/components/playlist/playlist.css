@@ -1,13 +1,25 @@
+
+:host {
+    display: block;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
 .list-group-item {
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+    background-color: var(--card-background);
+    border-color: var(--card-border-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .list-group-item:hover {
-  background-color: #f0f0f0;
+    background-color: var(--primary-color);
+    color: var(--card-background);
 }
 
 .list-group-item.active {
-  background-color: #e9ecef;
-  border-color: #e9ecef;
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--card-background);
 }
