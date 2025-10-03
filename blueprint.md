@@ -32,14 +32,3 @@ This project is a fast, mobile-first web application for SMWX podcast content. I
 *   **Playlist:** A `PlaylistComponent` is implemented to display a list of videos that the user can select to play.
 *   **Episode Detail:** An `EpisodeDetailComponent` displays the title and description of the selected video.
 *   **Main App:** The main `AppComponent` is updated to use the `VideoPlayerComponent`, `PlaylistComponent` and `EpisodeDetailComponent` to display the video playlist and details.
-
-## Current Plan: Sprint 1 - Foundation
-
-*   **DONE:** Reset the project to a clean slate.
-*   **DONE:** Define the core data models (`Episode`, `PlaylistItem`).
-*   **DONE:** Create the root `AppComponent`.
-*   **DONE:** Install and configure Bootstrap for styling.
-*   **DONE:** Implement the Service Worker for PWA and offline capabilities.
-*   **DONE:** Create the RSS parsing utility to fetch and parse the YouTube feed.
-*   **DONE:** Implement the main user interface with a video player and playlist.
-*   **DONE:** Add a component to display the selected episode's title and description.

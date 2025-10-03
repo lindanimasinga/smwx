@@ -1,14 +1,16 @@
 
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { PlaylistItem } from '../../../models';
+import { Episode } from '../../models/episode.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-playlist',
+  imports: [CommonModule],
   template: `
     <ul class="list-group">
-      @for (item of items(); track item.videoId) {
+      @for (item of items(); track item.url) {
         <li class="list-group-item" (click)="selectVideo.emit(item)">
-          <img [src]="item.thumbnailUrl" [alt]="item.title" class="img-thumbnail" width="120">
+          <img [src]="item.thumbnail" [alt]="item.title" class="img-thumbnail" width="120">
           {{ item.title }}
         </li>
       }
@@ -25,6 +27,6 @@ import { PlaylistItem } from '../../../models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaylistComponent {
-  public items = input.required<PlaylistItem[]>();
-  public selectVideo = output<PlaylistItem>();
+  public items = input.required<Episode[]>();
+  public selectVideo = output<Episode>();
 }

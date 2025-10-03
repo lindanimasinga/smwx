@@ -1,0 +1,11 @@
+<ul class="list-group">
+  @for (item of items(); track item.title) {
+    <li class="list-group-item" (click)="selectVideo.emit(item)">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ item.title }}</h5>
+        <small>{{ item.duration }}</small>
+      </div>
+      <p class="mb-1">{{ item.description }}</p>
+    </li>
+  }
+</ul>

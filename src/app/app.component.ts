@@ -1,19 +1,23 @@
 import { ChangeDetectionStrategy, Component, inject, signal, OnInit } from '@angular/core';
-import { RssService } from './core/rss.service';
+import { YouTubeDataService } from './core/youtube.service';
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { EpisodeDetailComponent } from './components/episode-detail/episode-detail.component';
-import { PlaylistItem } from '../models';
+import { Episode } from './models/episode.model';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from './components/header/header';
+import { FooterComponent } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
+  imports: [CommonModule, HeaderComponent, VideoPlayerComponent, PlaylistComponent, EpisodeDetailComponent, FooterComponent],
   template: `
+    <app-header />
     <div class="container-fluid">
-      <h1 class="text-center my-4">SMWX</h1>
       <div class="row">
         <div class="col-md-8">
           @if (selectedVideo()) {
-            <app-video-player [videoId]="selectedVideo()!.videoId" />
+            <app-video-player [videoId]="selectedVideo()!.url.split('v=')[1]" />
             <app-episode-detail [episode]="selectedVideo()!" />
           } @else {
             <p class="text-center">Select a video to play</p>
@@ -24,36 +28,33 @@ import { PlaylistItem } from '../models';
         </div>
       </div>
     </div>
+    <app-footer />
   `,
-  imports: [VideoPlayerComponent, PlaylistComponent, EpisodeDetailComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  private rssService = inject(RssService);
+  private youtubeDataService = inject(YouTubeDataService);
 
-  public playlistItems = signal<PlaylistItem[]>([]);
-  public selectedVideo = signal<PlaylistItem | null>(null);
-
-  // YouTube Channel RSS feed URL for SMWX
-  private feedUrl = 'https://www.youtube.com/feeds/videos.xml?channel_id=UC0p5jTq6_02nL2b_g66vXg';
+  public playlistItems = signal<Episode[]>([]);
+  public selectedVideo = signal<Episode | null>(null);
 
   ngOnInit() {
-    this.rssService.getFeed(this.feedUrl).subscribe({
-      next: ({ playlistItems }) => {
-        this.playlistItems.set(playlistItems);
-        if (playlistItems.length > 0) {
-          this.selectedVideo.set(playlistItems[0]);
+    this.youtubeDataService.getPlaylist().subscribe({
+      next: (episodes: Episode[]) => {
+        this.playlistItems.set(episodes);
+        if (episodes.length > 0) {
+          this.selectedVideo.set(episodes[0]);
         }
       },
-      error: (err) => {
-        console.error('Error fetching RSS feed:', err);
+      error: (err: any) => {
+        console.error('Error fetching YouTube playlist:', err);
         this.playlistItems.set([]);
         this.selectedVideo.set(null);
       }
     });
   }
 
-  onSelectVideo(video: PlaylistItem) {
+  onSelectVideo(video: Episode) {
     this.selectedVideo.set(video);
   }
 }
